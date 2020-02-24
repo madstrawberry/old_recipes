@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { GridContainer } from './shared/GridContainer';
 import { GridColumn } from './shared/GridColumn';
 import { Label } from './shared/Label';
+import { fromDevice } from '../styles/mediaQueries';
 
 type Props = {
   recipe: Recipe;
@@ -32,15 +33,15 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
         ))}
       </GridContainer>
 
-      <GridContainer top="lg">
-        <GridColumn width={60}>{recipe.description}</GridColumn>
-        <GridColumn>
+      <GridContainer top="lg" columnGap="md">
+        <GridColumn width={[100, 40]}>
           <ul>
             {recipe.ingredients.map(ingredient => (
               <li>{ingredient.name}</li>
             ))}
           </ul>
         </GridColumn>
+        <GridColumn width={[100, 60]}>{recipe.description}</GridColumn>
       </GridContainer>
     </Container>
   );
@@ -50,10 +51,18 @@ const Container = styled.div`
   margin: 0 auto;
   background: #f1f1f1;
   padding: ${props => props.theme.grid.lg}px;
-  width: 60%;
+  width: 90%;
   margin-top: ${props => props.theme.grid.lg}px;
   border-radius: 3px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+
+  ${fromDevice.md} {
+    width: 75%;
+  }
+
+  ${fromDevice.lg} {
+    width: 60%;
+  }
 `;
 
 const Title = styled.h2`

@@ -11,6 +11,7 @@ type GridContainerProps = {
 
 export const GridContainer = styled.div<GridContainerProps>`
   display: flex;
+  flex-wrap: wrap;
   ${props => props.alignItems && `align-items: ${props.alignItems}`};
   ${props => props.columnGap && columnGap};
   ${props => props.top && `margin-top: ${gridInPx(props, props.top)}`}
@@ -18,6 +19,6 @@ export const GridContainer = styled.div<GridContainerProps>`
 
 const columnGap = css<GridContainerProps>`
   > ${GridColumn} + ${GridColumn} {
-    margin-left: ${props => gridInPx(props, props.columnGap!)};
+    padding-left: ${props => gridInPx(props, props.columnGap!)};
   }
 `;

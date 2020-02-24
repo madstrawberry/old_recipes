@@ -11,4 +11,12 @@ export const GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    ul, h1, h2, h3 {
+      margin: 0
+    }
 `;

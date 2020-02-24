@@ -1,6 +1,7 @@
 import styled, { css } from 'styled-components';
+import { fromDevice } from '../../styles/mediaQueries';
 
-type GridColumnProps = { width?: number | 'auto'; align?: 'right' | 'left' };
+type GridColumnProps = { width?: number | 'auto' | number[]; align?: 'right' | 'left' };
 
 export const GridColumn = styled.div<GridColumnProps>`
   ${props => !props.align && props.width && flexWidth};
@@ -12,8 +13,18 @@ const flexWidth = css<GridColumnProps>`
   flex: ${props => {
     if (props.width === 'auto') return '1 0 auto';
 
-    return `1 0 ${props.width}%`;
+    if (typeof props.width === 'number') return `1 0 ${props.width}%`;
+
+    return `1 0 ${props.width![0]}%`;
   }};
+
+  ${props =>
+    Array.isArray(props.width!) &&
+    props.width.slice(1).map((size, index) => {
+      return `${Object.values(fromDevice)[index]} {
+        flex: 1 0 ${size}%;
+      }`;
+    })}
 `;
 
 const alignRight = css`
