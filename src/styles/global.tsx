@@ -13,7 +13,7 @@ export const GlobalStyles: React.FC<Props> = ({ theme }) => (
         margin: 0,
         padding: 0,
         background: theme.palette.background,
-        fontFamily: "'Roboto','Fira Sans', 'Droid Sans', 'Helvetica Neue'",
+        fontFamily: "'Simonetta','Fira Sans', 'Droid Sans', 'Helvetica Neue'",
         ' -webkit-font-smoothing': 'antialiased',
         '-moz-osx-font-smoothing': 'grayscale',
       },
