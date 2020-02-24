@@ -1,14 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import App from './App';
+import App from './components/App';
 import * as serviceWorker from './serviceWorker';
-import { ThemeProvider } from 'emotion-theming';
 import { theme } from './styles/theme';
 import { GlobalStyles } from './styles/global';
+import { ThemeProvider } from 'styled-components';
 
 ReactDOM.render(
   <ThemeProvider theme={theme}>
-    <GlobalStyles theme={theme} />
+    <GlobalStyles />
     <App />
   </ThemeProvider>,
   document.getElementById('root')

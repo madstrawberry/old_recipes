@@ -41,4 +41,4 @@ const rawData: Omit<Recipe, 'id'>[] = [
   },
 ];
 
-export const data: Recipe[] = rawData.map((a, index) => ({ ...a, id: index + 1 }));
+export const recipeData: Recipe[] = rawData.map((a, index) => ({ ...a, id: index + 1 }));

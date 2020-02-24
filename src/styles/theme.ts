@@ -1,7 +1,3 @@
-import styled, { CreateStyled } from '@emotion/styled';
-
-import { useTheme as useThemeFn } from 'emotion-theming';
-
 export const theme = {
   palette: {
     primary: '#222',
@@ -23,7 +19,3 @@ export const theme = {
 };
 
 export type Theme = typeof theme;
-
-export const useTheme = () => useThemeFn<Theme>();
-
-export default styled as CreateStyled<Theme>;
