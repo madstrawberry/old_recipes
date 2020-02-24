@@ -18,7 +18,11 @@ export const GridContainer = styled.div<GridContainerProps>`
 `;
 
 const columnGap = css<GridContainerProps>`
-  > ${GridColumn} + ${GridColumn} {
+  margin-left: -${props => gridInPx(props, props.columnGap!)};
+  margin-right: -${props => gridInPx(props, props.columnGap!)};
+
+  > ${GridColumn} {
     padding-left: ${props => gridInPx(props, props.columnGap!)};
+    padding-right: ${props => gridInPx(props, props.columnGap!)};
   }
 `;

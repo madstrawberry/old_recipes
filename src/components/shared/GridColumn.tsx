@@ -1,12 +1,19 @@
 import styled, { css } from 'styled-components';
 import { fromDevice } from '../../styles/mediaQueries';
+import { GridSize } from '../../styles/theme';
+import { gridInPx } from '../../styles/themeHelpers';
 
-type GridColumnProps = { width?: number | 'auto' | number[]; align?: 'right' | 'left' };
+type GridColumnProps = {
+  width?: number | 'auto' | number[];
+  align?: 'right' | 'left';
+  top?: GridSize | (GridSize | '')[];
+};
 
 export const GridColumn = styled.div<GridColumnProps>`
   ${props => !props.align && props.width && flexWidth};
   ${props => props.align === 'left' && alignLeft};
   ${props => props.align === 'right' && alignRight};
+  ${props => props.top && marginTop}
 `;
 
 const flexWidth = css<GridColumnProps>`
@@ -33,4 +40,20 @@ const alignRight = css`
 
 const alignLeft = css`
   margin-right: auto;
+`;
+
+const marginTop = css<GridColumnProps>`
+  margin-top: ${props => {
+    if (!Array.isArray(props.top!)) return gridInPx(props, props.top!);
+
+    return props.top[0] && gridInPx(props, props.top[0]);
+  }};
+
+  ${props =>
+    Array.isArray(props.top!) &&
+    props.top.slice(1).map((size, index) => {
+      return `${Object.values(fromDevice)[index]} {
+        margin-top: ${size ? gridInPx(props, size) : 0};
+      }`;
+    })}
 `;

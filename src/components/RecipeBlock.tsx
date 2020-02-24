@@ -41,7 +41,9 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
             ))}
           </ul>
         </GridColumn>
-        <GridColumn width={[100, 60]}>{recipe.description}</GridColumn>
+        <GridColumn width={[100, 60]} top={['lg', '']}>
+          {recipe.description}
+        </GridColumn>
       </GridContainer>
     </Container>
   );
