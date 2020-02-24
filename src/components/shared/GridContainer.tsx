@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 import { GridColumn } from './GridColumn';
 import { GridSize } from '../../styles/theme';
-import { gridInPx } from '../../styles/themeHelpers';
+import { gridInPx, grid } from '../../styles/themeHelpers';
 
 type GridContainerProps = {
   alignItems?: 'center' | 'baseline';
@@ -18,11 +18,11 @@ export const GridContainer = styled.div<GridContainerProps>`
 `;
 
 const columnGap = css<GridContainerProps>`
-  margin-left: -${props => gridInPx(props, props.columnGap!)};
-  margin-right: -${props => gridInPx(props, props.columnGap!)};
+  margin-left: -${props => grid(props, props.columnGap!) / 2}px;
+  margin-right: -${props => grid(props, props.columnGap!) / 2}px;
 
   > ${GridColumn} {
-    padding-left: ${props => gridInPx(props, props.columnGap!)};
-    padding-right: ${props => gridInPx(props, props.columnGap!)};
+    padding-left: ${props => grid(props, props.columnGap!) / 2}px;
+    padding-right: ${props => grid(props, props.columnGap!) / 2}px;
   }
 `;
