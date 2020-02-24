@@ -11,7 +11,7 @@ function App() {
 }
 
 const Par = styled.p(({ theme }) => ({
-  color: theme.colors.main,
+  color: theme.palette.primary,
 }));
 
 export default App;
