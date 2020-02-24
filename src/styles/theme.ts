@@ -18,4 +18,6 @@ export const theme = {
   },
 };
 
+export type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
+
 export type Theme = typeof theme;

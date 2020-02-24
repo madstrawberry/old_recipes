@@ -1,7 +1,9 @@
 import React from 'react';
-import { Recipe } from '../models';
+import { Recipe, RecipeCategory, RecipeType } from '../models';
 import styled from 'styled-components';
-import { GridContainer, GridColumn } from './shared/Grid';
+import { GridContainer } from './shared/GridContainer';
+import { GridColumn } from './shared/GridColumn';
+import { Label } from './shared/Label';
 
 type Props = {
   recipe: Recipe;
@@ -10,10 +12,26 @@ type Props = {
 export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
   return (
     <Container>
-      <Title>
-        {recipe.name}
-        <span>{recipe.time} min</span>
-      </Title>
+      <GridContainer alignItems="baseline">
+        <GridColumn>
+          <Title>{recipe.name}</Title>
+        </GridColumn>
+        <GridColumn align="right">{recipe.time} min</GridColumn>
+      </GridContainer>
+
+      <GridContainer columnGap="sm">
+        {recipe.category.map(c => (
+          <GridColumn>
+            <CategoryLabel type={c}>{c}</CategoryLabel>
+          </GridColumn>
+        ))}
+        {recipe.type.map(t => (
+          <GridColumn>
+            <TypeLabel type={t}>{t}</TypeLabel>
+          </GridColumn>
+        ))}
+      </GridContainer>
+
       <GridContainer>
         <GridColumn width={60}>{recipe.description}</GridColumn>
         <GridColumn>
@@ -41,6 +59,7 @@ const Container = styled.div(({ theme: { grid } }) => ({
 }));
 
 const Title = styled.h2(({ theme }) => ({
+  margin: `0 0 ${theme.grid.lg}px 0`,
   fontSize: 28,
   fontWeight: theme.font.bold,
   display: 'flex',
@@ -51,3 +70,44 @@ const Title = styled.h2(({ theme }) => ({
     fontWeight: theme.font.default,
   },
 }));
+
+const CategoryLabel = styled(Label)<{ type: RecipeCategory }>`
+  background: ${props => {
+    switch (props.type) {
+      case 'breakfast':
+        return 'yellow';
+      case 'dessert':
+        return 'pink';
+      case 'dinner':
+        return 'darkgreen';
+      case 'lunch':
+        return 'orange';
+      case 'sidedish':
+        return 'lightblue';
+      case 'starter':
+        return 'beige';
+      default:
+        return 'pink';
+    }
+  }};
+`;
+const TypeLabel = styled(Label)<{ type: RecipeType }>`
+  background: ${props => {
+    switch (props.type) {
+      case 'fish':
+        return 'blue';
+      case 'meat':
+        return 'red';
+      case 'soup':
+        return 'brown';
+      case 'sweet':
+        return 'purple';
+      case 'vegan':
+        return 'lightgreen';
+      case 'vegetarian':
+        return 'green';
+      default:
+        return 'none';
+    }
+  }};
+`;

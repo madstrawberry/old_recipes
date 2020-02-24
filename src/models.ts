@@ -1,6 +1,6 @@
-type RecipeType = 'vegetarian' | 'vegan' | 'meat' | 'fish' | 'sweet' | 'soup';
+export type RecipeType = 'vegetarian' | 'vegan' | 'meat' | 'fish' | 'sweet' | 'soup';
 
-type RecipeCategory = 'breakfast' | 'dinner' | 'lunch' | 'dessert' | 'starter' | 'sidedish';
+export type RecipeCategory = 'breakfast' | 'dinner' | 'lunch' | 'dessert' | 'starter' | 'sidedish';
 
 type Unit = 'ts' | 'tbs' | 'ml' | 'l' | 'gr' | 'kg' | 'pc';
 
