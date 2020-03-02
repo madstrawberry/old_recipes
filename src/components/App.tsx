@@ -13,6 +13,7 @@ const App: React.FC = () => {
   const [recipes, setRecipes] = useState<Recipe[]>([]);
   const [filters, sendFilter] = useReducer<FilterReducer>(filterReducer, {
     order: 'asc',
+    ingredients: [],
   });
 
   const loadData = async () => {

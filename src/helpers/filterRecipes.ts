@@ -5,7 +5,7 @@ export function getSortedRecipes(recipes: Recipe[], filterState: FilterState) {
   return recipes
     .filter(category(filterState.category))
     .filter(type(filterState.type))
-    .filter(ingredient(filterState.ingredient))
+    .filter(ingredients(filterState.ingredients))
     .sort(orderType(filterState.order));
 }
 
@@ -14,8 +14,10 @@ const category = (category?: RecipeCategory) => (recipe: Recipe) =>
 
 const type = (type?: RecipeType) => (recipe: Recipe) => (!type ? true : recipe.type.includes(type));
 
-const ingredient = (ingredient?: string) => (recipe: Recipe) =>
-  !ingredient ? recipe : recipe.ingredients.some(i => i.name.includes(ingredient));
+const ingredients = (ingredients: string[]) => (recipe: Recipe) =>
+  !ingredients.length
+    ? recipe
+    : ingredients.every(i => recipe.ingredients.some(ri => ri.name.includes(i)));
 
 const orderType = (order: 'asc' | 'desc') => (order === 'asc' ? sortAsc : sortDesc);
 

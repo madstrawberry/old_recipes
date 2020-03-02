@@ -4,13 +4,14 @@ export type FilterAction =
   | { type: 'ORDER_ASC' }
   | { type: 'ORDER_DESC' }
   | { type: 'FILTER_INGREDIENTS'; payload: string }
+  | { type: 'REMOVE_INGREDIENT'; payload: string }
   | { type: 'FILTER_CATEGORY'; payload: RecipeCategory }
   | { type: 'FILTER_TYPE'; payload: RecipeType }
   | { type: 'CLEAR' };
 
 export type FilterState = {
   order: 'asc' | 'desc';
-  ingredient?: string;
+  ingredients: string[];
   category?: RecipeCategory;
   type?: RecipeType;
 };
@@ -34,7 +35,13 @@ export const filterReducer: FilterReducer = (state, action) => {
     case 'FILTER_INGREDIENTS': {
       return {
         ...state,
-        ingredient: action.payload,
+        ingredients: [...state.ingredients, action.payload],
+      };
+    }
+    case 'REMOVE_INGREDIENT': {
+      return {
+        ...state,
+        ingredients: state.ingredients.filter(i => i !== action.payload),
       };
     }
     case 'FILTER_CATEGORY': {
@@ -53,7 +60,7 @@ export const filterReducer: FilterReducer = (state, action) => {
       return {
         ...state,
         type: undefined,
-        ingredient: undefined,
+        ingredients: [],
         category: undefined,
       };
     }

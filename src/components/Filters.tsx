@@ -9,12 +9,11 @@ type Props = {
 };
 
 export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
-  const [ingredient, setIngredient] = useState('');
+  const [ingredient, setIngredient] = useState<string>('');
 
-  const updateIngredientFilter = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setIngredient(value);
-    sendFilter({ type: 'FILTER_INGREDIENTS', payload: value });
+  const updateIngredientFilter = () => {
+    sendFilter({ type: 'FILTER_INGREDIENTS', payload: ingredient });
+    setIngredient('');
   };
 
   const clearFilters = () => {
@@ -28,7 +27,22 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
       <button onClick={() => sendFilter({ type: 'ORDER_DESC' })}>Order desc</button>
       <br />
       <br />
-      Ingredient: <input type="text" onChange={updateIngredientFilter} value={ingredient} />
+      Ingredient:{' '}
+      <input
+        type="text"
+        id="ingredient"
+        onChange={e => setIngredient(e.target.value)}
+        value={ingredient}
+      />{' '}
+      <button onClick={updateIngredientFilter}>Add</button>{' '}
+      {filters.ingredients.map((ingredient, i) => (
+        <Ingredient
+          key={i}
+          onClick={() => sendFilter({ type: 'REMOVE_INGREDIENT', payload: ingredient })}
+        >
+          {ingredient}
+        </Ingredient>
+      ))}
       <br />
       <br />
       <button onClick={clearFilters}>Clear filters</button>
@@ -47,5 +61,17 @@ const Container = styled.div`
 
   ${fromDevice.lg} {
     width: 60%;
+  }
+`;
+
+const Ingredient = styled.span`
+  display: inline-block;
+  background: #ddd;
+  border-radius: 3px;
+  border: 1px solid #aaa;
+  padding: 2px;
+
+  & + & {
+    margin-left: ${props => props.theme.gridInPx.sm};
   }
 `;
