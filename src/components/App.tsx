@@ -1,13 +1,19 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useReducer } from 'react';
 
 import { Recipe } from '../models';
 import { recipeData } from '../mockData/data';
 import { RecipeBlock } from './RecipeBlock';
 import { delay } from '../helpers/delay';
+import { FilterReducer, filterReducer } from './FilterReducer';
+import { Filter } from './Filters';
+import { getSortedRecipes } from '../helpers/filterRecipes';
 
 const App: React.FC = () => {
   const [isLoading, setIsloading] = useState(true);
   const [recipes, setRecipes] = useState<Recipe[]>([]);
+  const [filters, sendFilter] = useReducer<FilterReducer>(filterReducer, {
+    order: 'asc',
+  });
 
   const loadData = async () => {
     setIsloading(true);
@@ -28,10 +34,13 @@ const App: React.FC = () => {
     return <p>no recipes found...</p>;
   }
 
+  const filteredRecipes = getSortedRecipes(recipes, filters);
+
   return (
     <>
-      {recipes.map(r => (
-        <RecipeBlock recipe={r} />
+      <Filter filters={filters} sendFilter={sendFilter} />
+      {filteredRecipes.map(r => (
+        <RecipeBlock recipe={r} key={r.id} />
       ))}
     </>
   );

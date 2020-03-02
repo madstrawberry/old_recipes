@@ -16,6 +16,14 @@ export const theme = {
     xl: 32,
     xxl: 40,
   },
+  gridInPx: {
+    xs: '4px',
+    sm: '8px',
+    md: '16px',
+    lg: '24px',
+    xl: '32px',
+    xxl: '40px',
+  },
 };
 
 export type GridSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | 'xxl';
