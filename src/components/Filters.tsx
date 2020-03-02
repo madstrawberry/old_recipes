@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { FilterState, FilterAction } from './FilterReducer';
 import styled from 'styled-components';
 import { fromDevice } from '../styles/mediaQueries';
+import { RecipeType } from '../models';
 
 type Props = {
   filters: FilterState;
@@ -45,6 +46,16 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
       ))}
       <br />
       <br />
+      {Object.values(RecipeType).map(type => (
+        <RecipeTypeBtn
+          isActive={type === filters.type}
+          onClick={() => sendFilter({ type: 'FILTER_TYPE', payload: type })}
+        >
+          {type}
+        </RecipeTypeBtn>
+      ))}
+      <br />
+      <br />
       <button onClick={clearFilters}>Clear filters</button>
     </Container>
   );
@@ -70,6 +81,16 @@ const Ingredient = styled.span`
   border-radius: 3px;
   border: 1px solid #aaa;
   padding: 2px;
+
+  & + & {
+    margin-left: ${props => props.theme.gridInPx.sm};
+  }
+`;
+
+const RecipeTypeBtn = styled.button<{ isActive?: boolean }>`
+  border: 1px solid #aaa;
+  border-radius: 3px;
+  background: ${props => (props.isActive ? 'pink' : 'transparent')};
 
   & + & {
     margin-left: ${props => props.theme.gridInPx.sm};

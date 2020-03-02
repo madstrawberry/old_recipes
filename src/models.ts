@@ -1,6 +1,13 @@
-export type RecipeType = 'vegetarian' | 'vegan' | 'meat' | 'fish' | 'sweet' | 'soup';
-
 export type RecipeCategory = 'breakfast' | 'dinner' | 'lunch' | 'dessert' | 'starter' | 'sidedish';
+
+export enum RecipeType {
+  vegetarian = 'vegetarian',
+  vegan = 'vegan',
+  meat = 'meat',
+  fish = 'fish',
+  sweet = 'sweet',
+  soup = 'soup',
+}
 
 type Unit = 'ts' | 'tbs' | 'ml' | 'l' | 'gr' | 'kg' | 'pc';
 

@@ -1,4 +1,4 @@
-import { Recipe } from '../models';
+import { Recipe, RecipeType } from '../models';
 
 const rawData: Omit<Recipe, 'id'>[] = [
   {
@@ -11,7 +11,7 @@ const rawData: Omit<Recipe, 'id'>[] = [
       { name: 'bladerdeeg vellen', amount: 5, unit: 'pc' },
       { name: 'geraspte kaas', amount: 1, unit: 'pc' },
     ],
-    type: ['vegetarian'],
+    type: ['vegetarian' as any],
     category: ['dinner'],
     time: 40,
   },
@@ -23,7 +23,7 @@ const rawData: Omit<Recipe, 'id'>[] = [
       { name: 'olijfolie', amount: 2, unit: 'tbs' },
       { name: 'kruiden naar smaak', amount: 2, unit: 'ts' },
     ],
-    type: ['vegetarian', 'vegan'],
+    type: [RecipeType.vegan, RecipeType.vegetarian],
     category: ['dinner', 'sidedish'],
     time: 30,
   },
@@ -35,7 +35,7 @@ const rawData: Omit<Recipe, 'id'>[] = [
       { name: 'suiker', amount: 300, unit: 'gr' },
       { name: 'koekjes', amount: 250, unit: 'gr' },
     ],
-    type: ['vegetarian', 'sweet'],
+    type: [RecipeType.vegetarian, RecipeType.sweet],
     category: ['dessert', 'sidedish'],
     time: 200,
   },
