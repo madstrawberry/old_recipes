@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FilterState, FilterAction } from './FilterReducer';
+import { FilterState, FilterAction } from '../helpers/filterReducer';
 import styled from 'styled-components';
 import { fromDevice } from '../styles/mediaQueries';
 import { RecipeType, RecipeCategory } from '../models';
