@@ -21,13 +21,13 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
       </GridContainer>
 
       <GridContainer columnGap="sm" top="lg">
-        {recipe.category.map(c => (
-          <GridColumn>
+        {recipe.category.map((c, i) => (
+          <GridColumn key={i}>
             <CategoryLabel type={c}>{c}</CategoryLabel>
           </GridColumn>
         ))}
-        {recipe.type.map(t => (
-          <GridColumn>
+        {recipe.type.map((t, i) => (
+          <GridColumn key={i}>
             <TypeLabel type={t}>{t}</TypeLabel>
           </GridColumn>
         ))}
@@ -36,8 +36,8 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
       <GridContainer top="lg" columnGap="md">
         <GridColumn width={[100, 40]}>
           <ul>
-            {recipe.ingredients.map(ingredient => (
-              <li>{ingredient.name}</li>
+            {recipe.ingredients.map((ingredient, i) => (
+              <li key={i}>{ingredient.name}</li>
             ))}
           </ul>
         </GridColumn>
