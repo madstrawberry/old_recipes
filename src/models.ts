@@ -1,4 +1,11 @@
-export type RecipeCategory = 'breakfast' | 'dinner' | 'lunch' | 'dessert' | 'starter' | 'sidedish';
+export enum RecipeCategory {
+  breakfast = 'breakfast',
+  lunch = 'lunch',
+  starter = 'starter',
+  dinner = 'dinner',
+  dessert = 'dessert',
+  sidedish = 'sidedish',
+}
 
 export enum RecipeType {
   vegetarian = 'vegetarian',
