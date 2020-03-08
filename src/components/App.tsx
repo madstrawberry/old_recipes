@@ -7,6 +7,9 @@ import { delay } from '../helpers/delay';
 import { FilterReducer, filterReducer } from '../helpers/filterReducer';
 import { Filter } from './Filters';
 import { getSortedRecipes } from '../helpers/filterRecipes';
+import { Menu } from './Menu';
+
+export type Tab = 'filters' | 'list' | 'none';
 
 const App: React.FC = () => {
   const [isLoading, setIsloading] = useState(true);
@@ -15,6 +18,7 @@ const App: React.FC = () => {
     order: 'asc',
     ingredients: [],
   });
+  const [activeTab, setActiveTab] = useState<Tab>('none');
 
   const loadData = async () => {
     setIsloading(true);
@@ -39,7 +43,8 @@ const App: React.FC = () => {
 
   return (
     <>
-      <Filter filters={filters} sendFilter={sendFilter} />
+      <Menu activeTab={activeTab} setActiveTab={setActiveTab} />
+      {activeTab === 'filters' && <Filter filters={filters} sendFilter={sendFilter} />}
       {filteredRecipes.map(r => (
         <RecipeBlock recipe={r} key={r.id} />
       ))}
