@@ -47,13 +47,13 @@ export const filterReducer: FilterReducer = (state, action) => {
     case 'FILTER_CATEGORY': {
       return {
         ...state,
-        category: action.payload,
+        category: state.category === action.payload ? undefined : action.payload,
       };
     }
     case 'FILTER_TYPE': {
       return {
         ...state,
-        type: action.payload,
+        type: state.type === action.payload ? undefined : action.payload,
       };
     }
     case 'CLEAR': {
