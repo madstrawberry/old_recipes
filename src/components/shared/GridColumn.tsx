@@ -6,7 +6,7 @@ import { gridInPx } from '../../styles/themeHelpers';
 type GridColumnProps = {
   width?: number | 'auto' | number[];
   align?: 'right' | 'left';
-  top?: GridSize | (GridSize | '')[];
+  top?: (GridSize | '')[];
 };
 
 export const GridColumn = styled.div<GridColumnProps>`
@@ -27,11 +27,13 @@ const flexWidth = css<GridColumnProps>`
 
   ${props =>
     Array.isArray(props.width!) &&
-    props.width.slice(1).map((size, index) => {
-      return `${Object.values(fromDevice)[index]} {
-        flex: 1 0 ${size}%;
-      }`;
-    })}
+    props.width.slice(1).map(
+      (size, index) =>
+        `${Object.values(fromDevice)[index]} {
+          flex: 1 0 ${size}%;
+        }
+      `
+    )};
 `;
 
 const alignRight = css`
@@ -44,16 +46,21 @@ const alignLeft = css`
 
 const marginTop = css<GridColumnProps>`
   margin-top: ${props => {
-    if (!Array.isArray(props.top!)) return gridInPx(props, props.top!);
+    if (!props.top) return;
+    if (!Array.isArray(props.top)) return gridInPx(props, props.top);
 
     return props.top[0] && gridInPx(props, props.top[0]);
   }};
 
-  ${props =>
-    Array.isArray(props.top!) &&
-    props.top.slice(1).map((size, index) => {
-      return `${Object.values(fromDevice)[index]} {
-        margin-top: ${size ? gridInPx(props, size) : 0};
-      }`;
-    })}
+  ${props => {
+    if (!props.top && !Array.isArray(props.top)) return;
+
+    return props.top.slice(1).map(
+      (size, index) =>
+        `${Object.values(fromDevice)[index]} {
+          margin-top: ${size ? gridInPx(props, size) : 0};
+        }
+      `
+    );
+  }};
 `;
