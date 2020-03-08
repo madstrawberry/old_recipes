@@ -4,7 +4,7 @@ import { Recipe } from '../models';
 import { recipeData } from '../mockData/data';
 import { RecipeBlock } from './RecipeBlock';
 import { delay } from '../helpers/delay';
-import { FilterReducer, filterReducer } from './FilterReducer';
+import { FilterReducer, filterReducer } from '../helpers/filterReducer';
 import { Filter } from './Filters';
 import { getSortedRecipes } from '../helpers/filterRecipes';
 
