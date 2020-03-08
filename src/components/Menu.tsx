@@ -11,16 +11,25 @@ type Props = {
 };
 
 export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
+  const setTab = (tab: 'filters' | 'list') => () => {
+    if (activeTab === tab) {
+      setActiveTab('none');
+      return;
+    }
+
+    setActiveTab(tab);
+  };
+
   return (
     <Container>
       <GridContainer columnGap={'sm'}>
         <GridColumn width={50}>
-          <MenuButton isActive={activeTab === 'filters'} onClick={() => setActiveTab('filters')}>
+          <MenuButton isActive={activeTab === 'filters'} onClick={setTab('filters')}>
             Filters
           </MenuButton>
         </GridColumn>
         <GridColumn width={50}>
-          <MenuButton isActive={activeTab === 'list'} onClick={() => setActiveTab('list')}>
+          <MenuButton isActive={activeTab === 'list'} onClick={setTab('list')}>
             List
           </MenuButton>
         </GridColumn>
