@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { FilterState, FilterAction } from '../helpers/filterReducer';
 import styled from 'styled-components';
-import { fromDevice } from '../styles/mediaQueries';
 import { RecipeType, RecipeCategory } from '../models';
+import { Container } from './shared/Container';
 
 type Props = {
   filters: FilterState;
@@ -70,20 +70,6 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
     </Container>
   );
 };
-
-const Container = styled.div`
-  width: 90%;
-  margin: 0 auto;
-  margin-top: ${props => props.theme.gridInPx.lg};
-
-  ${fromDevice.md} {
-    width: 75%;
-  }
-
-  ${fromDevice.lg} {
-    width: 60%;
-  }
-`;
 
 const Ingredient = styled.span`
   display: inline-block;
