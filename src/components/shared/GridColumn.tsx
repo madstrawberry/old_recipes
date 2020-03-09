@@ -6,7 +6,7 @@ import { gridInPx } from '../../styles/themeHelpers';
 type GridColumnProps = {
   width?: number | 'auto' | number[];
   align?: 'right' | 'left';
-  top?: (GridSize | '')[];
+  top?: GridSize | (GridSize | '')[];
 };
 
 export const GridColumn = styled.div<GridColumnProps>`
@@ -53,14 +53,17 @@ const marginTop = css<GridColumnProps>`
   }};
 
   ${props => {
-    if (!props.top && !Array.isArray(props.top)) return;
+    if (!props.top) return;
 
-    return props.top.slice(1).map(
-      (size, index) =>
-        `${Object.values(fromDevice)[index]} {
+    return (
+      Array.isArray(props.top) &&
+      props.top.slice(1).map(
+        (size, index) =>
+          `${Object.values(fromDevice)[index]} {
           margin-top: ${size ? gridInPx(props, size) : 0};
         }
       `
+      )
     );
   }};
 `;
