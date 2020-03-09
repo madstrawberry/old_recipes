@@ -45,6 +45,12 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
           {recipe.description}
         </GridColumn>
       </GridContainer>
+
+      <GridContainer top="lg">
+        <GridColumn width={100}>
+          <button>Voeg toe aan boodschappenlijst</button>
+        </GridColumn>
+      </GridContainer>
     </Container>
   );
 };
