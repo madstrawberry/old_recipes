@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { FilterState, FilterAction } from '../helpers/filterReducer';
 import styled from 'styled-components';
 import { RecipeType, RecipeCategory } from '../models';
-import { Container } from './shared/Container';
 
 type Props = {
   filters: FilterState;
@@ -23,7 +22,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
   };
 
   return (
-    <Container>
+    <>
       <button onClick={() => sendFilter({ type: 'ORDER_ASC' })}>Order asc</button>{' '}
       <button onClick={() => sendFilter({ type: 'ORDER_DESC' })}>Order desc</button>
       <br />
@@ -67,7 +66,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
       <br />
       <br />
       <button onClick={clearFilters}>Clear filters</button>
-    </Container>
+    </>
   );
 };
 

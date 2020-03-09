@@ -8,6 +8,7 @@ import { FilterReducer, filterReducer } from '../helpers/filterReducer';
 import { Filter } from './Filters';
 import { getSortedRecipes } from '../helpers/filterRecipes';
 import { Menu } from './Menu';
+import { Dialog } from './shared/Dialog';
 
 export type Tab = 'filters' | 'list' | 'none';
 
@@ -44,7 +45,11 @@ const App: React.FC = () => {
   return (
     <>
       <Menu activeTab={activeTab} setActiveTab={setActiveTab} />
-      {activeTab === 'filters' && <Filter filters={filters} sendFilter={sendFilter} />}
+      {activeTab === 'filters' && (
+        <Dialog onClose={() => setActiveTab('none')}>
+          <Filter filters={filters} sendFilter={sendFilter} />
+        </Dialog>
+      )}
       {filteredRecipes.map(r => (
         <RecipeBlock recipe={r} key={r.id} />
       ))}
