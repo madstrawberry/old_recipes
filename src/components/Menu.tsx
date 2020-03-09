@@ -23,12 +23,12 @@ export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   return (
     <StyledContainer>
       <GridContainer columnGap={'sm'}>
-        <GridColumn width={50}>
+        <GridColumn width={[100, 50]}>
           <MenuButton isActive={activeTab === 'filters'} onClick={setTab('filters')}>
             Filters
           </MenuButton>
         </GridColumn>
-        <GridColumn width={50}>
+        <GridColumn width={[100, 50]} top={['sm', '']}>
           <MenuButton isActive={activeTab === 'list'} onClick={setTab('list')}>
             Boodschappenlijst
           </MenuButton>
