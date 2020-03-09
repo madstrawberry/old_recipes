@@ -41,6 +41,7 @@ export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
 const StyledContainer = styled(Container)`
   position: sticky;
   top: 0;
+  background: ${props => props.theme.palette.background};
 `;
 
 const MenuButton = styled.button<{ isActive: boolean }>`
