@@ -21,7 +21,7 @@ export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   };
 
   return (
-    <Container>
+    <StyledContainer>
       <GridContainer columnGap={'sm'}>
         <GridColumn width={50}>
           <MenuButton isActive={activeTab === 'filters'} onClick={setTab('filters')}>
@@ -30,15 +30,25 @@ export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
         </GridColumn>
         <GridColumn width={50}>
           <MenuButton isActive={activeTab === 'list'} onClick={setTab('list')}>
-            List
+            Boodschappenlijst
           </MenuButton>
         </GridColumn>
       </GridContainer>
-    </Container>
+    </StyledContainer>
   );
 };
 
+const StyledContainer = styled(Container)`
+  position: sticky;
+  top: 0;
+`;
+
 const MenuButton = styled.button<{ isActive: boolean }>`
   width: 100%;
-  background: ${props => (props.isActive ? 'pink' : 'white')};
+  border: 0;
+  color: #fff;
+  font-size: 24px;
+  background: #444;
+  padding: 10px;
+  box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
 `;
