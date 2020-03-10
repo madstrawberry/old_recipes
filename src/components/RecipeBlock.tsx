@@ -13,8 +13,8 @@ type Props = {
 export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
   return (
     <Container>
-      <GridContainer alignItems="baseline">
-        <GridColumn>
+      <GridContainer alignItems="baseline" columnGap="sm">
+        <GridColumn width={75}>
           <Title>{recipe.name}</Title>
         </GridColumn>
         <GridColumn align="right">{recipe.time} min</GridColumn>
@@ -33,7 +33,7 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
         ))}
       </GridContainer>
 
-      <GridContainer top="lg" columnGap="md">
+      <GridContainer top="lg" columnGap={['lg', 'md']}>
         <GridColumn width={[100, 40]}>
           <ul>
             {recipe.ingredients.map((ingredient, i) => (
@@ -41,14 +41,12 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
             ))}
           </ul>
         </GridColumn>
-        <GridColumn width={[100, 60]} top={['lg', '']}>
-          {recipe.description}
-        </GridColumn>
+        <GridColumn width={[100, 60]}>{recipe.description}</GridColumn>
       </GridContainer>
 
       <GridContainer top="lg">
         <GridColumn width={100}>
-          <button>Voeg toe aan boodschappenlijst</button>
+          <AddButton>Voeg toe aan boodschappenlijst</AddButton>
         </GridColumn>
       </GridContainer>
     </Container>
@@ -118,4 +116,11 @@ const TypeLabel = styled(Label)<{ type: RecipeType }>`
         return 'none';
     }
   }};
+`;
+
+const AddButton = styled.button`
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 16px;
+  border-radius: 3px;
 `;
