@@ -28,7 +28,7 @@ export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
             Filters
           </MenuButton>
         </GridColumn>
-        <GridColumn width={[100, 50]} top={['sm', '']}>
+        <GridColumn width={[100, 50]}>
           <MenuButton isActive={activeTab === 'list'} onClick={setTab('list')}>
             Boodschappenlijst
           </MenuButton>
