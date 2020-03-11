@@ -41,13 +41,14 @@ const App: React.FC = () => {
   }
 
   const filteredRecipes = getSortedRecipes(recipes, filters);
+  const closeDialog = () => setActiveTab('none');
 
   return (
     <>
       <Menu activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'filters' && (
-        <Dialog onClose={() => setActiveTab('none')}>
-          <Filter filters={filters} sendFilter={sendFilter} />
+        <Dialog onClose={closeDialog}>
+          <Filter filters={filters} sendFilter={sendFilter} closeDialog={closeDialog} />
         </Dialog>
       )}
       {filteredRecipes.map(r => (

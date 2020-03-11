@@ -8,9 +8,10 @@ import { GridColumn } from './shared/GridColumn';
 type Props = {
   filters: FilterState;
   sendFilter: React.Dispatch<FilterAction>;
+  closeDialog: () => void;
 };
 
-export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
+export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) => {
   const [ingredient, setIngredient] = useState<string>('');
 
   const updateIngredientFilter = () => {
@@ -75,7 +76,14 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
       </GridContainer>
       <br />
       <br />
-      <button onClick={clearFilters}>Clear filters</button>
+      <GridContainer columnGap={'sm'}>
+        <GridColumn width={50}>
+          <ButtonFullWidth onClick={clearFilters}>Verwijder filters</ButtonFullWidth>
+        </GridColumn>
+        <GridColumn width={50}>
+          <ButtonFullWidth onClick={closeDialog}>Zoek recepten</ButtonFullWidth>
+        </GridColumn>
+      </GridContainer>
     </>
   );
 };
@@ -96,4 +104,10 @@ const TypeBtn = styled.button<{ isActive?: boolean }>`
   border: 1px solid #aaa;
   border-radius: 3px;
   background: ${props => (props.isActive ? 'pink' : 'transparent')};
+`;
+
+const ButtonFullWidth = styled.button`
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 10px;
 `;
