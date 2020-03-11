@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { FilterState, FilterAction } from '../helpers/filterReducer';
 import styled from 'styled-components';
 import { RecipeType, RecipeCategory } from '../models';
+import { GridContainer } from './shared/GridContainer';
+import { GridColumn } from './shared/GridColumn';
 
 type Props = {
   filters: FilterState;
@@ -45,24 +47,32 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter }) => {
       ))}
       <br />
       <br />
-      {Object.values(RecipeType).map(type => (
-        <TypeBtn
-          isActive={type === filters.type}
-          onClick={() => sendFilter({ type: 'FILTER_TYPE', payload: type })}
-        >
-          {type}
-        </TypeBtn>
-      ))}
+      <GridContainer columnGap={'sm'}>
+        {Object.values(RecipeType).map((type, index) => (
+          <GridColumn key={index}>
+            <TypeBtn
+              isActive={type === filters.type}
+              onClick={() => sendFilter({ type: 'FILTER_TYPE', payload: type })}
+            >
+              {type}
+            </TypeBtn>
+          </GridColumn>
+        ))}
+      </GridContainer>
       <br />
       <br />
-      {Object.values(RecipeCategory).map(category => (
-        <TypeBtn
-          isActive={category === filters.category}
-          onClick={() => sendFilter({ type: 'FILTER_CATEGORY', payload: category })}
-        >
-          {category}
-        </TypeBtn>
-      ))}
+      <GridContainer columnGap={'sm'}>
+        {Object.values(RecipeCategory).map((category, index) => (
+          <GridColumn key={index}>
+            <TypeBtn
+              isActive={category === filters.category}
+              onClick={() => sendFilter({ type: 'FILTER_CATEGORY', payload: category })}
+            >
+              {category}
+            </TypeBtn>
+          </GridColumn>
+        ))}
+      </GridContainer>
       <br />
       <br />
       <button onClick={clearFilters}>Clear filters</button>
@@ -86,8 +96,4 @@ const TypeBtn = styled.button<{ isActive?: boolean }>`
   border: 1px solid #aaa;
   border-radius: 3px;
   background: ${props => (props.isActive ? 'pink' : 'transparent')};
-
-  & + & {
-    margin-left: ${props => props.theme.gridInPx.sm};
-  }
 `;
