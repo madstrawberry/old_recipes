@@ -4,6 +4,7 @@ import { Container } from './shared/Container';
 import styled from 'styled-components';
 import { GridContainer } from './shared/GridContainer';
 import { GridColumn } from './shared/GridColumn';
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 type Props = {
   activeTab: Tab;
@@ -23,14 +24,14 @@ export const Menu: React.FC<Props> = ({ activeTab, setActiveTab }) => {
   return (
     <StyledContainer>
       <GridContainer columnGap={'sm'}>
-        <GridColumn width={[100, 50]}>
+        <GridColumn width={[70]}>
           <MenuButton isActive={activeTab === 'filters'} onClick={setTab('filters')}>
             Filters
           </MenuButton>
         </GridColumn>
-        <GridColumn width={[100, 50]}>
+        <GridColumn width={[30]}>
           <MenuButton isActive={activeTab === 'list'} onClick={setTab('list')}>
-            Boodschappenlijst
+            <ShoppingBasketIcon />
           </MenuButton>
         </GridColumn>
       </GridContainer>
@@ -46,10 +47,13 @@ const StyledContainer = styled(Container)`
 
 const MenuButton = styled.button<{ isActive: boolean }>`
   width: 100%;
+  display: flex;
   border: 0;
   color: #fff;
   font-size: 24px;
   background: #444;
-  padding: 10px;
+  height: 50px;
+  line-height: 50px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
+  justify-content: center;
 `;
