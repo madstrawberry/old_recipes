@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import ReactDOM from 'react-dom';
-import { CloseIcon } from '../icons/closeIcon';
+import CloseIcon from '@material-ui/icons/Close';
 import { GridContainer } from './GridContainer';
 import { GridColumn } from './GridColumn';
 
