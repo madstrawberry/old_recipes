@@ -3,6 +3,7 @@
 - [ ] Make possible to check items in grocery list
 - [ ] Make possible to clear checked items in grocery list
 - [ ] Make possible to empty grocery list
+- [ ] Show icon in grocery button of how many ingredients are on the list
 - [ ] Show amount and size of ingredients in recipe blocks
 - [ ] Show amount and size of ingredients in grocery list
 - [ ] Redesign add to grocery list button
