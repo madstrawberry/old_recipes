@@ -17,7 +17,9 @@ const type = (type?: RecipeType) => (recipe: Recipe) => (!type ? true : recipe.t
 const ingredients = (ingredients: string[]) => (recipe: Recipe) =>
   !ingredients.length
     ? recipe
-    : ingredients.every(i => recipe.ingredients.some(ri => ri.name.includes(i)));
+    : ingredients
+        .map(i => i.toLowerCase())
+        .every(i => recipe.ingredients.some(ri => ri.name.toLowerCase().includes(i)));
 
 const orderType = (order: 'asc' | 'desc') => (order === 'asc' ? sortAsc : sortDesc);
 
