@@ -18,9 +18,9 @@ export const Dialog: React.FC<Props> = ({ children, onClose }) => {
             <h2>Filters</h2>
           </GridColumn>
           <GridColumn align="right">
-            <button onClick={onClose}>
+            <CloseButton onClick={onClose}>
               <CloseIcon />
-            </button>
+            </CloseButton>
           </GridColumn>
         </GridContainer>
 
@@ -47,7 +47,12 @@ const DialogContainer = styled.div`
   left: 25px;
   bottom: 25px;
   right: 25px;
-  padding: 30px;
+  padding: ${props => props.theme.gridInPx.lg};
   border-radius: 3px;
   overflow: auto;
+`;
+
+const CloseButton = styled.button`
+  border: 0;
+  background: none;
 `;
