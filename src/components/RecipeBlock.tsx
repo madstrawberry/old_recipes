@@ -5,6 +5,7 @@ import { GridContainer } from './shared/GridContainer';
 import { GridColumn } from './shared/GridColumn';
 import { Label } from './shared/Label';
 import { Container } from './shared/Container';
+import { translateType, translateCategory } from '../helpers/translation';
 
 type Props = {
   recipe: Recipe;
@@ -23,12 +24,12 @@ export const RecipeBlock: React.FC<Props> = ({ recipe }) => {
       <GridContainer columnGap="sm" top="lg">
         {recipe.category.map((c, i) => (
           <GridColumn key={i}>
-            <CategoryLabel type={c}>{c}</CategoryLabel>
+            <CategoryLabel type={c}>{translateCategory(c)}</CategoryLabel>
           </GridColumn>
         ))}
         {recipe.type.map((t, i) => (
           <GridColumn key={i}>
-            <TypeLabel type={t}>{t}</TypeLabel>
+            <TypeLabel type={t}>{translateType(t)}</TypeLabel>
           </GridColumn>
         ))}
       </GridContainer>
