@@ -43,10 +43,10 @@ const Background = styled.div`
 const DialogContainer = styled.div`
   position: absolute;
   background: #fff;
-  top: 40px;
-  left: 40px;
-  bottom: 40px;
-  right: 40px;
+  top: 25px;
+  left: 25px;
+  bottom: 25px;
+  right: 25px;
   padding: 30px;
   border-radius: 3px;
   overflow: auto;
