@@ -1,3 +1,17 @@
+### TODO
+
+- [ ] Make possible to check items in grocery list
+- [ ] Make possible to clear checked items in grocery list
+- [ ] Make possible to empty grocery list
+- [ ] Show amount and size of ingredients in recipe blocks
+- [ ] Show amount and size of ingredients in grocery list
+- [ ] Redesign add to grocery list button
+- [ ] Redesign category and type labels
+- [ ] Filter on multiple types and ingredients
+- [ ] Improve theme to include border radius, all used colors etc
+- [ ] Add dark theme
+- [ ] Add possibility to only add ingredients to grocery list that were not filtered on (assuming you already have these)
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
