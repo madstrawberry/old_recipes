@@ -49,4 +49,5 @@ const DialogContainer = styled.div`
   right: 40px;
   padding: 30px;
   border-radius: 3px;
+  overflow: auto;
 `;
