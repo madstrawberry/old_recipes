@@ -54,6 +54,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
             <GridContainer columnGap={'sm'} top={'sm'}>
               <GridColumn width={'auto'} height={'40px'}>
                 <InputField
+                  onKeyDown={e => e.key === 'Enter' && updateIngredientFilter()}
                   type="text"
                   id="ingredient"
                   onChange={e => setIngredient(e.target.value)}
