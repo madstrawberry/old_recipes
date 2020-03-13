@@ -53,7 +53,6 @@ const MenuButton = styled.button<{ isActive: boolean }>`
   font-size: 24px;
   background: #444;
   height: 50px;
-  line-height: 50px;
   box-shadow: 1px 1px 2px 1px rgba(0, 0, 0, 0.1);
   justify-content: center;
 `;

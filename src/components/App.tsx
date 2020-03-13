@@ -9,6 +9,7 @@ import { Filter } from './Filters';
 import { getSortedRecipes } from '../helpers/filterRecipes';
 import { Menu } from './Menu';
 import { Dialog } from './shared/Dialog';
+import styled from 'styled-components';
 
 export type Tab = 'filters' | 'list' | 'none';
 
@@ -44,7 +45,7 @@ const App: React.FC = () => {
   const closeDialog = () => setActiveTab('none');
 
   return (
-    <>
+    <AppContainer>
       <Menu activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'filters' && (
         <Dialog onClose={closeDialog}>
@@ -54,8 +55,12 @@ const App: React.FC = () => {
       {filteredRecipes.map(r => (
         <RecipeBlock recipe={r} key={r.id} />
       ))}
-    </>
+    </AppContainer>
   );
 };
+
+const AppContainer = styled.div`
+  padding: ${props => props.theme.gridInPx.lg};
+`;
 
 export default App;
