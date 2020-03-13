@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useReducer } from 'react';
 
-import { Recipe } from '../models';
+import { Recipe, Ingredient } from '../models';
 import { recipeData } from '../mockData/data';
 import { RecipeBlock } from './RecipeBlock';
 import { delay } from '../helpers/delay';
@@ -10,6 +10,7 @@ import { getSortedRecipes } from '../helpers/filterRecipes';
 import { Menu } from './Menu';
 import { Dialog } from './shared/Dialog';
 import styled from 'styled-components';
+import { List } from './List';
 
 export type Tab = 'filters' | 'list' | 'none';
 
@@ -21,6 +22,7 @@ const App: React.FC = () => {
     ingredients: [],
   });
   const [activeTab, setActiveTab] = useState<Tab>('none');
+  const [items, setItems] = useState<Ingredient[]>([]);
 
   const loadData = async () => {
     setIsloading(true);
@@ -43,17 +45,25 @@ const App: React.FC = () => {
 
   const filteredRecipes = getSortedRecipes(recipes, filters);
   const closeDialog = () => setActiveTab('none');
+  const addToList = (newItems: Ingredient[]) => {
+    setItems([...items, ...newItems]);
+  };
 
   return (
     <AppContainer>
       <Menu activeTab={activeTab} setActiveTab={setActiveTab} />
       {activeTab === 'filters' && (
-        <Dialog onClose={closeDialog}>
+        <Dialog title={'Filters'} onClose={closeDialog}>
           <Filter filters={filters} sendFilter={sendFilter} closeDialog={closeDialog} />
         </Dialog>
       )}
+      {activeTab === 'list' && (
+        <Dialog title={'Boodschappenlijst'} onClose={closeDialog}>
+          <List items={items} />
+        </Dialog>
+      )}
       {filteredRecipes.map(r => (
-        <RecipeBlock recipe={r} key={r.id} />
+        <RecipeBlock recipe={r} key={r.id} addToList={addToList} />
       ))}
     </AppContainer>
   );

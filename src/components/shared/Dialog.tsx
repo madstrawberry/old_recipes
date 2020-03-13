@@ -7,15 +7,16 @@ import { GridColumn } from './GridColumn';
 
 type Props = {
   onClose: () => void;
+  title: string;
 };
 
-export const Dialog: React.FC<Props> = ({ children, onClose }) => {
+export const Dialog: React.FC<Props> = ({ children, onClose, title }) => {
   return ReactDOM.createPortal(
     <Background>
       <DialogContainer>
         <GridContainer alignItems="center">
           <GridColumn>
-            <h2>Filters</h2>
+            <h2>{title}</h2>
           </GridColumn>
           <GridColumn align="right">
             <CloseButton onClick={onClose}>
