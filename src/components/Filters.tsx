@@ -52,7 +52,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
           <GridColumn width={100}>
             Ingredienten:
             <GridContainer columnGap={'sm'} top={'sm'}>
-              <GridColumn width={'auto'}>
+              <GridColumn width={'auto'} height={'40px'}>
                 <InputField
                   type="text"
                   id="ingredient"
@@ -61,7 +61,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
                 />
               </GridColumn>
 
-              <GridColumn width={'30px'}>
+              <GridColumn width={'30px'} height={'40px'}>
                 <IconButtonFullWidth onClick={updateIngredientFilter}>
                   <AddIcon />
                 </IconButtonFullWidth>
@@ -168,11 +168,13 @@ const MainButtonFullWidth = styled(ButtonFullWidth)<ButtonProps>`
 const InputField = styled.input`
   border: 1px solid #ccc;
   width: 100%;
+  height: 100%;
   padding: ${props => props.theme.gridInPx.sm};
 `;
 
 const IconButtonFullWidth = styled(ButtonFullWidth)`
   padding: 5px 0 1px;
+  height: 100%;
 `;
 
 const TextButton = styled.button`

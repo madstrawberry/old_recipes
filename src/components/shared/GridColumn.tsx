@@ -5,15 +5,21 @@ import { gridInPx } from '../../styles/themeHelpers';
 
 type GridColumnProps = {
   width?: number | 'auto' | number[] | string;
+  height?: string;
   align?: 'right' | 'left';
   top?: GridSize | (GridSize | '')[];
 };
 
 export const GridColumn = styled.div<GridColumnProps>`
   ${props => !props.align && props.width && flexWidth};
+  ${props => props.height && height};
   ${props => props.align === 'left' && alignLeft};
   ${props => props.align === 'right' && alignRight};
   ${props => props.top && marginTop}
+`;
+
+const height = css<GridColumnProps>`
+  height: ${props => props.height};
 `;
 
 const flexWidth = css<GridColumnProps>`
