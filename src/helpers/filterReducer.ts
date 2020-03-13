@@ -35,7 +35,9 @@ export const filterReducer: FilterReducer = (state, action) => {
     case 'FILTER_INGREDIENTS': {
       return {
         ...state,
-        ingredients: [...state.ingredients, action.payload],
+        ingredients: !action.payload
+          ? state.ingredients
+          : [...new Set([...state.ingredients, action.payload])],
       };
     }
     case 'REMOVE_INGREDIENT': {
