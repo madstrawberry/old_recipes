@@ -70,7 +70,7 @@ const columnGapDefault = (columnGap?: GridSize) => {
     > ${GridColumn} {
       padding-left: ${props => grid(props, columnGap) / 2}px;
       padding-right: ${props => grid(props, columnGap) / 2}px;
-      padding-top: ${props => gridInPx(props, columnGap)};
+      margin-top: ${props => gridInPx(props, columnGap)};
     }
   `;
 };
@@ -89,7 +89,7 @@ const columnGapResponsive = (columnGaps?: GridSize[]) => {
           > ${GridColumn} {
             padding-left: ${grid(props, gap) / 2}px;
             padding-right: ${grid(props, gap) / 2}px;
-            padding-top: ${gridInPx(props, gap)};
+            margin-top: ${gridInPx(props, gap)};
           }
         }
         `
