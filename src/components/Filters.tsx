@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { RecipeType, RecipeCategory } from '../models';
 import { GridContainer } from './shared/GridContainer';
 import { GridColumn } from './shared/GridColumn';
+import AddIcon from '@material-ui/icons/Add';
 
 type Props = {
   filters: FilterState;
@@ -22,69 +23,112 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
   const clearFilters = () => {
     setIngredient('');
     sendFilter({ type: 'CLEAR' });
+    closeDialog();
   };
 
   return (
-    <>
-      <button onClick={() => sendFilter({ type: 'ORDER_ASC' })}>Order asc</button>{' '}
-      <button onClick={() => sendFilter({ type: 'ORDER_DESC' })}>Order desc</button>
-      <br />
-      <br />
-      Ingredient:{' '}
-      <input
-        type="text"
-        id="ingredient"
-        onChange={e => setIngredient(e.target.value)}
-        value={ingredient}
-      />{' '}
-      <button onClick={updateIngredientFilter}>Add</button>{' '}
-      {filters.ingredients.map((ingredient, i) => (
-        <Ingredient
-          key={i}
-          onClick={() => sendFilter({ type: 'REMOVE_INGREDIENT', payload: ingredient })}
-        >
-          {ingredient}
-        </Ingredient>
-      ))}
-      <br />
-      <br />
-      <GridContainer columnGap={'sm'}>
-        {Object.values(RecipeType).map((type, index) => (
-          <GridColumn key={index}>
-            <TypeBtn
-              isActive={type === filters.type}
-              onClick={() => sendFilter({ type: 'FILTER_TYPE', payload: type })}
+    <GridContainer top="lg">
+      <GridColumn>
+        <GridContainer columnGap={'sm'}>
+          <GridColumn width={[50, 30]}>
+            <ButtonFullWidth
+              isActive={filters.order === 'asc'}
+              onClick={() => sendFilter({ type: 'ORDER_ASC' })}
             >
-              {type}
-            </TypeBtn>
+              Oplopend
+            </ButtonFullWidth>
           </GridColumn>
-        ))}
-      </GridContainer>
-      <br />
-      <br />
-      <GridContainer columnGap={'sm'}>
-        {Object.values(RecipeCategory).map((category, index) => (
-          <GridColumn key={index}>
-            <TypeBtn
-              isActive={category === filters.category}
-              onClick={() => sendFilter({ type: 'FILTER_CATEGORY', payload: category })}
+          <GridColumn width={[50, 30]}>
+            <ButtonFullWidth
+              isActive={filters.order === 'desc'}
+              onClick={() => sendFilter({ type: 'ORDER_DESC' })}
             >
-              {category}
-            </TypeBtn>
+              Aflopend
+            </ButtonFullWidth>
           </GridColumn>
-        ))}
-      </GridContainer>
-      <br />
-      <br />
-      <GridContainer columnGap={'sm'}>
-        <GridColumn width={50}>
-          <ButtonFullWidth onClick={clearFilters}>Verwijder filters</ButtonFullWidth>
-        </GridColumn>
-        <GridColumn width={50}>
-          <ButtonFullWidth onClick={closeDialog}>Zoek recepten</ButtonFullWidth>
-        </GridColumn>
-      </GridContainer>
-    </>
+        </GridContainer>
+
+        <GridContainer top={'lg'}>
+          <GridColumn width={100}>
+            Ingredienten:
+            <br />
+            <GridContainer columnGap={'sm'} top={'sm'}>
+              <GridColumn width={'auto'}>
+                <InputField
+                  type="text"
+                  id="ingredient"
+                  onChange={e => setIngredient(e.target.value)}
+                  value={ingredient}
+                />
+              </GridColumn>
+
+              <GridColumn width={'30px'}>
+                <IconButtonFullWidth onClick={updateIngredientFilter}>
+                  <AddIcon />
+                </IconButtonFullWidth>
+              </GridColumn>
+            </GridContainer>
+            {!!filters.ingredients.length && (
+              <GridContainer columnGap={'sm'} top={'sm'}>
+                {filters.ingredients.map((ingredient, i) => (
+                  <GridColumn key={i}>
+                    <Ingredient
+                      onClick={() => sendFilter({ type: 'REMOVE_INGREDIENT', payload: ingredient })}
+                    >
+                      {ingredient}
+                    </Ingredient>
+                  </GridColumn>
+                ))}
+              </GridContainer>
+            )}
+          </GridColumn>
+        </GridContainer>
+
+        <GridContainer top={'lg'}>
+          Type: <br />
+          <GridContainer columnGap={'sm'} top={'sm'}>
+            {Object.values(RecipeType).map((type, index) => (
+              <GridColumn key={index}>
+                <TypeBtn
+                  isActive={type === filters.type}
+                  onClick={() => sendFilter({ type: 'FILTER_TYPE', payload: type })}
+                >
+                  {type}
+                </TypeBtn>
+              </GridColumn>
+            ))}
+          </GridContainer>
+        </GridContainer>
+
+        <GridContainer top={'lg'}>
+          Categorie: <br />
+          <GridContainer columnGap={'sm'} top={'sm'}>
+            {Object.values(RecipeCategory).map((category, index) => (
+              <GridColumn key={index}>
+                <TypeBtn
+                  isActive={category === filters.category}
+                  onClick={() => sendFilter({ type: 'FILTER_CATEGORY', payload: category })}
+                >
+                  {category}
+                </TypeBtn>
+              </GridColumn>
+            ))}
+          </GridContainer>
+        </GridContainer>
+
+        <GridContainer columnGap={'sm'} top={'xl'}>
+          <GridColumn width={100}>
+            <MainButtonFullWidth onClick={closeDialog}>Toon recepten</MainButtonFullWidth>
+          </GridColumn>
+        </GridContainer>
+
+        <GridContainer top={'xs'}>
+          <GridColumn align="right">
+            <TextButton onClick={clearFilters}>Verwijder filters</TextButton>
+          </GridColumn>
+        </GridContainer>
+      </GridColumn>
+    </GridContainer>
   );
 };
 
@@ -94,10 +138,6 @@ const Ingredient = styled.span`
   border-radius: 3px;
   border: 1px solid #aaa;
   padding: 2px;
-
-  & + & {
-    margin-left: ${props => props.theme.gridInPx.sm};
-  }
 `;
 
 const TypeBtn = styled.button<{ isActive?: boolean }>`
@@ -106,8 +146,37 @@ const TypeBtn = styled.button<{ isActive?: boolean }>`
   background: ${props => (props.isActive ? 'pink' : 'transparent')};
 `;
 
-const ButtonFullWidth = styled.button`
+type ButtonProps = {
+  isActive?: boolean;
+};
+
+const ButtonFullWidth = styled.button<ButtonProps>`
   width: 100%;
   border: 1px solid #ccc;
-  padding: 10px;
+  padding: ${props => props.theme.gridInPx.sm};
+  text-align: center;
+  background-color: ${props => (props.isActive ? '#ccc' : 'initial')};
+`;
+
+const MainButtonFullWidth = styled(ButtonFullWidth)<ButtonProps>`
+  background-color: #ccc;
+  font-weight: bold;
+  border: 2px solid #aaa;
+  padding: ${props => props.theme.gridInPx.md};
+  border-radius: 3px;
+`;
+
+const InputField = styled.input`
+  border: 1px solid #ccc;
+  width: 100%;
+  padding: ${props => props.theme.gridInPx.sm};
+`;
+
+const IconButtonFullWidth = styled(ButtonFullWidth)`
+  padding: 5px 0 1px;
+`;
+
+const TextButton = styled.button`
+  border: 0;
+  background: none;
 `;

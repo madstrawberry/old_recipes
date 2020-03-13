@@ -4,7 +4,7 @@ import { GridSize } from '../../styles/theme';
 import { gridInPx } from '../../styles/themeHelpers';
 
 type GridColumnProps = {
-  width?: number | 'auto' | number[];
+  width?: number | 'auto' | number[] | string;
   align?: 'right' | 'left';
   top?: GridSize | (GridSize | '')[];
 };
@@ -19,6 +19,8 @@ export const GridColumn = styled.div<GridColumnProps>`
 const flexWidth = css<GridColumnProps>`
   flex: ${props => {
     if (props.width === 'auto') return '1 0 auto';
+
+    if (typeof props.width === 'string') return `1 0 ${props.width}`;
 
     if (typeof props.width === 'number') return `1 0 ${props.width}%`;
 
