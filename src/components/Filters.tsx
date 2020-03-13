@@ -3,6 +3,7 @@ import { FilterState, FilterAction } from '../helpers/filterReducer';
 import styled from 'styled-components';
 import { RecipeType, RecipeCategory } from '../models';
 import { GridContainer } from './shared/GridContainer';
+import { TypeBtn, CategoryBtn } from './shared/TypeButton';
 import { GridColumn } from './shared/GridColumn';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -105,12 +106,12 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
           <GridContainer columnGap={'sm'} top={'sm'}>
             {Object.values(RecipeCategory).map((category, index) => (
               <GridColumn key={index}>
-                <TypeBtn
+                <CategoryBtn
                   isActive={category === filters.category}
                   onClick={() => sendFilter({ type: 'FILTER_CATEGORY', payload: category })}
                 >
                   {category}
-                </TypeBtn>
+                </CategoryBtn>
               </GridColumn>
             ))}
           </GridContainer>
@@ -122,7 +123,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
           </GridColumn>
         </GridContainer>
 
-        <GridContainer top={'xs'}>
+        <GridContainer top={'sm'}>
           <GridColumn align="right">
             <TextButton onClick={clearFilters}>Verwijder filters</TextButton>
           </GridColumn>
@@ -138,12 +139,6 @@ const Ingredient = styled.span`
   border-radius: 3px;
   border: 1px solid #aaa;
   padding: 2px;
-`;
-
-const TypeBtn = styled.button<{ isActive?: boolean }>`
-  border: 1px solid #aaa;
-  border-radius: 3px;
-  background: ${props => (props.isActive ? 'pink' : 'transparent')};
 `;
 
 type ButtonProps = {
