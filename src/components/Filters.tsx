@@ -3,7 +3,7 @@ import { FilterState, FilterAction } from '../helpers/filterReducer';
 import styled from 'styled-components';
 import { RecipeType, RecipeCategory } from '../models';
 import { GridContainer } from './shared/GridContainer';
-import { TypeBtn, CategoryBtn } from './shared/TypeButton';
+import { TypeButton, CategoryButton } from './shared/TypeButton';
 import { GridColumn } from './shared/GridColumn';
 import AddIcon from '@material-ui/icons/Add';
 
@@ -90,12 +90,12 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
           <GridContainer columnGap={'sm'} top={'sm'}>
             {Object.values(RecipeType).map((type, index) => (
               <GridColumn key={index}>
-                <TypeBtn
+                <TypeButton
                   isActive={type === filters.type}
                   onClick={() => sendFilter({ type: 'FILTER_TYPE', payload: type })}
                 >
                   {type}
-                </TypeBtn>
+                </TypeButton>
               </GridColumn>
             ))}
           </GridContainer>
@@ -106,12 +106,12 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
           <GridContainer columnGap={'sm'} top={'sm'}>
             {Object.values(RecipeCategory).map((category, index) => (
               <GridColumn key={index}>
-                <CategoryBtn
+                <CategoryButton
                   isActive={category === filters.category}
                   onClick={() => sendFilter({ type: 'FILTER_CATEGORY', payload: category })}
                 >
                   {category}
-                </CategoryBtn>
+                </CategoryButton>
               </GridColumn>
             ))}
           </GridContainer>
