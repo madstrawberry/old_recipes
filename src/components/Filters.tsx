@@ -51,7 +51,6 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
         <GridContainer top={'lg'}>
           <GridColumn width={100}>
             Ingredienten:
-            <br />
             <GridContainer columnGap={'sm'} top={'sm'}>
               <GridColumn width={'auto'}>
                 <InputField
@@ -85,7 +84,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
         </GridContainer>
 
         <GridContainer top={'lg'}>
-          Type: <br />
+          Type:
           <GridContainer columnGap={'sm'} top={'sm'}>
             {Object.values(RecipeType).map((type, index) => (
               <GridColumn key={index}>
@@ -101,7 +100,7 @@ export const Filter: React.FC<Props> = ({ filters, sendFilter, closeDialog }) =>
         </GridContainer>
 
         <GridContainer top={'lg'}>
-          Categorie: <br />
+          Categorie:
           <GridContainer columnGap={'sm'} top={'sm'}>
             {Object.values(RecipeCategory).map((category, index) => (
               <GridColumn key={index}>
