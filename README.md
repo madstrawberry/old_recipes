@@ -1,9 +1,12 @@
 ### TODO
 
+- [ ] Save items in grocery list to local storage
 - [ ] Make possible to check items in grocery list
 - [ ] Make possible to clear checked items in grocery list
 - [ ] Make possible to empty grocery list
 - [ ] Show icon in grocery button of how many ingredients are on the list
+- [ ] Show fancy animation when items are added to grocery list
+- [ ] Show added and icon when added to recipe list, or at least feedback
 - [ ] Show amount and size of ingredients in recipe blocks
 - [ ] Show amount and size of ingredients in grocery list
 - [ ] Redesign add to grocery list button
