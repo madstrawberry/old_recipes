@@ -10,7 +10,13 @@ import { getSortedRecipes } from '../helpers/filterRecipes';
 import { Menu } from './Menu';
 import { Dialog } from './shared/Dialog';
 import styled from 'styled-components';
-import { List } from './List';
+import { GroceryList } from './GroceryList';
+import {
+  GroceryListReducer,
+  groceryListReducer,
+  saveIngredientsInLocalStorage,
+  getIngredientsFromLocalStorage,
+} from '../helpers/groceryItemsReducer';
 
 export type Tab = 'filters' | 'list' | 'none';
 
@@ -22,7 +28,9 @@ const App: React.FC = () => {
     ingredients: [],
   });
   const [activeTab, setActiveTab] = useState<Tab>('none');
-  const [items, setItems] = useState<Ingredient[]>([]);
+  const [groceryList, updateGroceryList] = useReducer<GroceryListReducer>(groceryListReducer, {
+    items: {},
+  });
 
   const loadData = async () => {
     setIsloading(true);
@@ -33,7 +41,12 @@ const App: React.FC = () => {
 
   useEffect(() => {
     loadData();
+    updateGroceryList({ type: 'REPLACE_LIST', payload: getIngredientsFromLocalStorage() });
   }, []);
+
+  useEffect(() => {
+    saveIngredientsInLocalStorage(groceryList.items);
+  }, [groceryList]);
 
   if (isLoading) {
     return <p>loading...</p>;
@@ -44,10 +57,11 @@ const App: React.FC = () => {
   }
 
   const filteredRecipes = getSortedRecipes(recipes, filters);
+
   const closeDialog = () => setActiveTab('none');
-  const addToList = (newItems: Ingredient[]) => {
-    setItems([...items, ...newItems]);
-  };
+
+  const addToList = (items: Ingredient[]) =>
+    updateGroceryList({ type: 'ADD_ITEMS', payload: items });
 
   return (
     <AppContainer>
@@ -59,10 +73,10 @@ const App: React.FC = () => {
       )}
       {activeTab === 'list' && (
         <Dialog title={'Boodschappenlijst'} onClose={closeDialog}>
-          <List items={items} />
+          <GroceryList items={groceryList.items} updateGroceryList={updateGroceryList} />
         </Dialog>
       )}
-      {filteredRecipes.map(r => (
+      {filteredRecipes.map((r) => (
         <RecipeBlock recipe={r} key={r.id} addToList={addToList} />
       ))}
     </AppContainer>
@@ -70,7 +84,7 @@ const App: React.FC = () => {
 };
 
 const AppContainer = styled.div`
-  padding: ${props => props.theme.gridInPx.lg};
+  padding: ${(props) => props.theme.gridInPx.lg};
 `;
 
 export default App;

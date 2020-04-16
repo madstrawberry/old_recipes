@@ -33,3 +33,9 @@ export type Ingredient = {
   amount: number;
   unit: Unit;
 };
+
+export type GroceryItemID = string;
+
+export type GroceryListItems = {
+  [id: string /* GroceryItemID */]: Ingredient & { isChecked: boolean };
+};
