@@ -1,10 +1,10 @@
-import React from 'react';
-import { Tab } from './App';
 import { Container } from './shared/Container';
-import styled from 'styled-components';
-import { GridContainer } from './shared/GridContainer';
 import { GridColumn } from './shared/GridColumn';
+import { GridContainer } from './shared/GridContainer';
+import React from 'react';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
+import { Tab } from './App';
+import styled from 'styled-components';
 
 type Props = {
   activeTab: Tab;

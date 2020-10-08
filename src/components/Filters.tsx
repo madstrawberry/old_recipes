@@ -1,11 +1,12 @@
+import { FilterAction, FilterState } from '../helpers/filterReducer';
 import React, { useState } from 'react';
-import { FilterState, FilterAction } from '../helpers/filterReducer';
-import styled from 'styled-components';
-import { RecipeType, RecipeCategory } from '../models';
-import { GridContainer } from './shared/GridContainer';
-import { GridColumn } from './shared/GridColumn';
-import AddIcon from '@material-ui/icons/Add';
+import { RecipeCategory, RecipeType } from '../models';
 import { translateCategory, translateType } from '../helpers/translation';
+
+import AddIcon from '@material-ui/icons/Add';
+import { GridColumn } from './shared/GridColumn';
+import { GridContainer } from './shared/GridContainer';
+import styled from 'styled-components';
 
 type Props = {
   filters: FilterState;

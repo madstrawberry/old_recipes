@@ -1,4 +1,5 @@
 import { Recipe, RecipeCategory, RecipeType } from '../models';
+
 import { FilterState } from './filterReducer';
 
 export function getSortedRecipes(recipes: Recipe[], filterState: FilterState) {

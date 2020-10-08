@@ -1,4 +1,5 @@
-import { GroceryListItems, GroceryItemID, Ingredient } from '../models';
+import { GroceryItemID, GroceryListItems, Ingredient } from '../models';
+
 import { v4 as uuid } from 'uuid';
 
 export type GroceryListAction =
@@ -66,7 +67,7 @@ function ingredientToGroceryItem(ingredient: Ingredient): GroceryListItems {
 }
 
 function getGroceryItemById(groceryItems: GroceryListItems, id: GroceryItemID) {
-  const foundId = Object.keys(groceryItems).find((i) => i === id);
+  const foundId = Object.keys(groceryItems).find(i => i === id);
   const foundItem = foundId ? groceryItems[foundId] : null;
   return foundItem;
 }

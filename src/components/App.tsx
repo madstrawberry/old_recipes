@@ -1,22 +1,22 @@
-import React, { useState, useEffect, useReducer } from 'react';
-
-import { Recipe, Ingredient } from '../models';
-import { recipeData } from '../mockData/data';
-import { RecipeBlock } from './RecipeBlock';
-import { delay } from '../helpers/delay';
 import { FilterReducer, filterReducer } from '../helpers/filterReducer';
-import { Filter } from './Filters';
-import { getSortedRecipes } from '../helpers/filterRecipes';
-import { Menu } from './Menu';
-import { Dialog } from './shared/Dialog';
-import styled from 'styled-components';
-import { GroceryList } from './GroceryList';
 import {
   GroceryListReducer,
+  getIngredientsFromLocalStorage,
   groceryListReducer,
   saveIngredientsInLocalStorage,
-  getIngredientsFromLocalStorage,
 } from '../helpers/groceryItemsReducer';
+import { Ingredient, Recipe } from '../models';
+import React, { useEffect, useReducer, useState } from 'react';
+
+import { Dialog } from './shared/Dialog';
+import { Filter } from './Filters';
+import { GroceryList } from './GroceryList';
+import { Menu } from './Menu';
+import { RecipeBlock } from './RecipeBlock';
+import { delay } from '../helpers/delay';
+import { getSortedRecipes } from '../helpers/filterRecipes';
+import { recipeData } from '../mockData/data';
+import styled from 'styled-components';
 
 export type Tab = 'filters' | 'list' | 'none';
 
@@ -76,7 +76,7 @@ const App: React.FC = () => {
           <GroceryList items={groceryList.items} updateGroceryList={updateGroceryList} />
         </Dialog>
       )}
-      {filteredRecipes.map((r) => (
+      {filteredRecipes.map(r => (
         <RecipeBlock recipe={r} key={r.id} addToList={addToList} />
       ))}
     </AppContainer>
@@ -84,7 +84,7 @@ const App: React.FC = () => {
 };
 
 const AppContainer = styled.div`
-  padding: ${(props) => props.theme.gridInPx.lg};
+  padding: ${props => props.theme.gridInPx.lg};
 `;
 
 export default App;

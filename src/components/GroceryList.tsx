@@ -1,9 +1,9 @@
-import React from 'react';
-import { GridContainer } from './shared/GridContainer';
 import { GridColumn } from './shared/GridColumn';
-import { GroceryListItems } from '../models';
-import styled from 'styled-components';
+import { GridContainer } from './shared/GridContainer';
 import { GroceryListAction } from '../helpers/groceryItemsReducer';
+import { GroceryListItems } from '../models';
+import React from 'react';
+import styled from 'styled-components';
 
 type Props = {
   items: GroceryListItems;
@@ -15,7 +15,7 @@ export const GroceryList: React.FC<Props> = ({ items, updateGroceryList }) => {
     <GridContainer top={'lg'}>
       <GridColumn>
         <ul>
-          {Object.keys(items).map((id) => {
+          {Object.keys(items).map(id => {
             const groceryItem = items[id];
 
             return (
@@ -40,5 +40,5 @@ export const GroceryList: React.FC<Props> = ({ items, updateGroceryList }) => {
 };
 
 const Item = styled.li`
-  margin-top: ${(p) => p.theme.gridInPx.sm};
+  margin-top: ${p => p.theme.gridInPx.sm};
 `;

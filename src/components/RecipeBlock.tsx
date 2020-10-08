@@ -1,11 +1,12 @@
-import React from 'react';
-import { Recipe, RecipeCategory, RecipeType, Ingredient } from '../models';
-import styled from 'styled-components';
-import { GridContainer } from './shared/GridContainer';
-import { GridColumn } from './shared/GridColumn';
-import { Label } from './shared/Label';
+import { Ingredient, Recipe, RecipeCategory, RecipeType } from '../models';
+import { translateCategory, translateType } from '../helpers/translation';
+
 import { Container } from './shared/Container';
-import { translateType, translateCategory } from '../helpers/translation';
+import { GridColumn } from './shared/GridColumn';
+import { GridContainer } from './shared/GridContainer';
+import { Label } from './shared/Label';
+import React from 'react';
+import styled from 'styled-components';
 
 type Props = {
   recipe: Recipe;
