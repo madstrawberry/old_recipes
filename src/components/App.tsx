@@ -4,14 +4,14 @@ import {
   getIngredientsFromLocalStorage,
   groceryListReducer,
   saveIngredientsInLocalStorage,
-} from '../helpers/groceryItemsReducer';
-import { Ingredient, Recipe } from '../models';
+} from '../helpers/groceryListReducer';
 import React, { useEffect, useReducer, useState } from 'react';
 
 import { Dialog } from './shared/Dialog';
 import { Filter } from './Filters';
 import { GroceryList } from './GroceryList';
 import { Menu } from './Menu';
+import { Recipe } from '../models';
 import { RecipeBlock } from './RecipeBlock';
 import { delay } from '../helpers/delay';
 import { getSortedRecipes } from '../helpers/filterRecipes';
@@ -29,7 +29,8 @@ const App: React.FC = () => {
   });
   const [activeTab, setActiveTab] = useState<Tab>('none');
   const [groceryList, updateGroceryList] = useReducer<GroceryListReducer>(groceryListReducer, {
-    items: {},
+    recipes: [],
+    checked: {},
   });
 
   const loadData = async () => {
@@ -45,7 +46,7 @@ const App: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    saveIngredientsInLocalStorage(groceryList.items);
+    saveIngredientsInLocalStorage(groceryList);
   }, [groceryList]);
 
   if (isLoading) {
@@ -60,8 +61,8 @@ const App: React.FC = () => {
 
   const closeDialog = () => setActiveTab('none');
 
-  const addToList = (items: Ingredient[]) =>
-    updateGroceryList({ type: 'ADD_ITEMS', payload: items });
+  const addToGroceryList = (recipe: Recipe) =>
+    updateGroceryList({ type: 'ADD_RECIPE', payload: recipe });
 
   return (
     <AppContainer>
@@ -73,11 +74,11 @@ const App: React.FC = () => {
       )}
       {activeTab === 'list' && (
         <Dialog title={'Boodschappenlijst'} onClose={closeDialog}>
-          <GroceryList items={groceryList.items} updateGroceryList={updateGroceryList} />
+          <GroceryList groceryList={groceryList} updateGroceryList={updateGroceryList} />
         </Dialog>
       )}
       {filteredRecipes.map(r => (
-        <RecipeBlock recipe={r} key={r.id} addToList={addToList} />
+        <RecipeBlock recipe={r} key={r.id} addToList={addToGroceryList} />
       ))}
     </AppContainer>
   );

@@ -1,4 +1,4 @@
-import { Ingredient, Recipe, RecipeCategory, RecipeType } from '../models';
+import { Recipe, RecipeCategory, RecipeType } from '../models';
 import { translateCategory, translateType } from '../helpers/translation';
 
 import { Container } from './shared/Container';
@@ -10,7 +10,7 @@ import styled from 'styled-components';
 
 type Props = {
   recipe: Recipe;
-  addToList: (items: Ingredient[]) => void;
+  addToList: (recipe: Recipe) => void;
 };
 
 export const RecipeBlock: React.FC<Props> = ({ recipe, addToList }) => {
@@ -49,9 +49,7 @@ export const RecipeBlock: React.FC<Props> = ({ recipe, addToList }) => {
 
       <GridContainer top="lg">
         <GridColumn width={100}>
-          <AddButton onClick={() => addToList(recipe.ingredients)}>
-            Voeg toe aan boodschappenlijst
-          </AddButton>
+          <AddButton onClick={() => addToList(recipe)}>Voeg toe aan boodschappenlijst</AddButton>
         </GridColumn>
       </GridContainer>
     </StyledContainer>
